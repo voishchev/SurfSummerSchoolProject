@@ -14,13 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let startVC = UIViewController()
-        startVC.view.backgroundColor = .red
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = startVC
-        window?.makeKeyAndVisible()
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
         
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        startMainFlow()
         return true
+    }
+    func startMainFlow() {
+        window?.rootViewController = TabBarConfiguration().configure()
     }
 
 }
